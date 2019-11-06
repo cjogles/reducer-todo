@@ -33,6 +33,25 @@ export const initialState = {
           ...state,
           groceries: [...state.groceries, newGrocery]
         };
+      case 'TOGGLE_PURCHASED':
+          let newArr = [...action.payload];
+          newArr = newArr.map((item) => {
+              console.log("before", item.purchased);
+            if (item.purchased === true) {
+                item.purchased = false;
+                console.log("inside true", item.purchased);
+                return item;
+            } else if (item.purchased === false) {
+                item.purchased = true;
+                console.log("inside false", item.purchased);
+                return item;
+            }
+          })
+        case 'CLEAR_PURCHASED':
+            let newArray = [...action.payload];
+            let result = newArray.filter(item => item.purchased === false );
+            return result;
+          
       default:
         return state;
     }

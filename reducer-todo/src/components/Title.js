@@ -13,6 +13,15 @@ const Title = () => {
   const newGroceryChanges = e => {
       setNewGrocery(e.target.value);
   }
+  const togglePurchased = () => {
+      dispatch({ type: 'TOGGLE_PURCHASED', payload: groceries})
+  }
+  const clearAll = () => {
+      dispatch({ type: 'CLEAR_PURCHASED', payload: groceries})
+    // let newArr = [...this.state.data];
+    // let result = newArr.filter(task => task.completed === false );
+    // this.setState({data: result})
+  }
 
   return (
       <>
@@ -47,7 +56,7 @@ const Title = () => {
         <br></br>
         <br></br>
         <h1>
-            <TaskList item={groceries}/>
+            <TaskList item={groceries} togglePurchase={togglePurchased}/>
         </h1>
         <input
             className="grocery-input"
@@ -61,6 +70,10 @@ const Title = () => {
             dispatch({ type: 'ADD_NEW_GROCERY_ITEM', payload: newGrocery })
             }
         >Add grocery</button>
+        <button
+            className="far fa-edit"
+            onClick={clearAll}
+        > Clear ALL </button>
     </>
   );
 };

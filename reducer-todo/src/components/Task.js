@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Task = (props) => {
-    console.log("task props: ", props.task)
+    console.log("task props: ", props)
     return (
         <div className= 'Task'>
-            <div>
+            <div onClick={props.toggle}>
                 <p>{props.task.name}</p>
             </div>
         </div>
