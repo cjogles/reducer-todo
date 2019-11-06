@@ -1,7 +1,13 @@
 export const initialState = {
     editing: false,
-    title: 'This is from the reducer!!! 🚀',
-    groceries: []
+    title: 'Unoriginal Title :(',
+    groceries: [
+        {
+            name: "bannana",
+            id: Date.now(),
+            purchased: false
+        }
+    ]
   };
   
   export const reducer = (state, action) => {
