@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Title from './components/Title';
+import Title from './components/App';
 import './styles.css';
 
 function App() {

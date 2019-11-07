@@ -1,84 +1,44 @@
-export const initialState = {
-    editing: false,
-    title: 'Unoriginal Title :(',
-    groceries: [
-        {
-            name: "bannana",
-            id: Date.now(),
-            purchased: false
-        }
-    ]
-  };
+export const initialState = [
+    {
+        item: 'Learn about reducers',
+        completed: false,
+        id: 3892987589
+    },
+    {
+        item: 'Learn French',
+        completed: false,
+        id: 4892987589
+    },
+    {
+        item: 'Clean Floors',
+        completed: false,
+        id: 5892987589
+    },
+];
   
   export const reducer = (state, action) => {
+    console.log(state)
+    console.log(action)
     switch (action.type) {
-      case 'TOGGLE_EDIT':
-        return {
+      case 'ADD_TODO':
+        return [
           ...state,
-          editing: !state.editing
-        };
-      case 'SET_TITLE':
-        return {
-          ...state,
-          title: action.payload,
-          editing: false
-        };
-      case 'ADD_NEW_GROCERY_ITEM':
-        const newGrocery = {
-          name: action.payload,
-          id: Date.now(),
-          purchased: false
-        };
-        return {
-          ...state,
-          groceries: [...state.groceries, newGrocery]
-        };
-      case 'TOGGLE_PURCHASED':
-          let newArr = [...action.payload];
-          newArr = newArr.map((item) => {
-              console.log("before", item.purchased);
-            if (item.purchased === true) {
-                item.purchased = false;
-                console.log("inside true", item.purchased);
-                return item;
-            } else if (item.purchased === false) {
-                item.purchased = true;
-                console.log("inside false", item.purchased);
-                return item;
-            }
-          })
-        case 'CLEAR_PURCHASED':
-            let newArray = [...action.payload];
-            let result = newArray.filter(item => item.purchased === false );
-            return result;
-          
+          {
+            item: action.payload,
+            completed: false,
+            id: Date.now()
+          }
+        ];
+      case 'TOGGLE':
+        return state.map(todo =>
+          todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
+        )
+      case 'CLEAR':
+          return state.filter(todo => 
+            !todo.completed
+          )
       default:
         return state;
     }
   };
   
-
-// export const initialState = [
-//     {
-//       item: 'Learn about reducers',
-//       completed: false,
-//       id: 3892987589
-//     }
-//   ]
-//   // Initial count is established
-  
-//   // We will use the same reducer we created in the previous section
-//   export function reducer(state, action) {
-//     switch (action.type) {
-//       case 'ADD_TASK':
-//         return [...state,
-//           {
-//             item: action.payload,
-//             completed: false,
-//             id: Date.now()
-//           }
-//         ]
-//       default:
-//         return state
-//     }
-//   }
